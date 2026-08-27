@@ -1,16 +1,37 @@
 NervAOSP
-===========
+========
+
+NervAOSP is a LineageOS 23.2-based Android 16 custom ROM.
 
 Getting started
 ---------------
 
-To initialize your local repository using the NervAOSP trees, use a command like this:
+# build environment, then initialize and sync the source:
+
 ```
 repo init -u https://github.com/NervAOSP/Manifest.git -b 16.2 --git-lfs --depth 1
 ```
-Then to sync up:
+# then sync
 ```
-repo sync
+repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc)
 ```
 
----------------
+Initialize the build environment, then select a supported device target:
+
+```
+# Build
+
+- Set up the build environment
+```bash
+. b*/env*
+```
+
+- Lunch a target
+```bash
+lunch lineage_codename-bp4a-user
+```
+
+- To start compiling
+```bash
+m bacon
+```
