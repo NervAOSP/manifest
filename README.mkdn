@@ -18,7 +18,6 @@ repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc)
 
 Initialize the build environment, then select a supported device target:
 
-```
 # Build
 
 - Set up the build environment
