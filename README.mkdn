@@ -1,8 +1,6 @@
 NervAOSP
 ========
 
-NervAOSP is a LineageOS 23.2-based Android 16 custom ROM.
-
 Getting started
 ---------------
 
@@ -18,10 +16,6 @@ repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc)
 
 Initialize the build environment, then select a supported device target:
 
-NervAOSP platform forks are declared in `snippets/nerva.xml`. Device trees,
-proprietary vendor files, and kernels are added separately through
-`.repo/local_manifests/` or a device manifest repository.
-
 # Build
 
 - Set up the build environment
@@ -31,10 +25,10 @@ proprietary vendor files, and kernels are added separately through
 
 - Lunch a target
 ```bash
-lunch lineage_codename-bp4a-user
+unit lineage_codename-bp4a-user
 ```
 
 - To start compiling
 ```bash
-m bacon
+fly -j$(nproc --all)
 ```
