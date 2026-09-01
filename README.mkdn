@@ -23,9 +23,13 @@ Initialize the build environment, then select a supported device target:
 . b*/env*
 ```
 
-- Lunch a target
+- Select a target
 ```bash
 unit lineage_codename-bp4a-user
+```
+```bash
+example
+unit lineage_courbet-bp4a-userdebug
 ```
 
 - To start compiling
