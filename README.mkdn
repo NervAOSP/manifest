@@ -5,9 +5,19 @@ LineageOS-compatible device tree.
 
 ## Build
 
+### Download
+
 ```bash
 repo init -u https://github.com/NervAOSP/Manifest.git -b 16.2 --git-lfs --depth 1
+```
+
+```bash
 repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc)
+```
+
+### Environment
+
+```bash
 . b*/env*
 ```
 
