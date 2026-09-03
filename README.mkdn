@@ -57,10 +57,9 @@ The output zip is named `NervAOSP-Eva-01-<date>-<device>.zip`.
 
 ## Google Mobile Services (GMS)
 
-NervAOSP supports build-time integrated GMS (the same prebuilt GApps used by
-AxionOS, pulled from `vendor/gms`). The flavor is selected per-device by
-setting `NERV_VAR` in the device makefile (`lineage_<codename>.mk`) **before**
-inheriting the common product config:
+NervAOSP supports build-time integrated GMS. The flavor is selected per-device
+by setting `NERV_VAR` in the device makefile (`lineage_<codename>.mk`)
+**before** inheriting the common product config:
 
 ```make
 # In lineage_<codename>.mk
