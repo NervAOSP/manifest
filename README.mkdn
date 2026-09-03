@@ -28,7 +28,7 @@ unit <codename>-userdebug     # e.g. unit courbet-userdebug
 fly -j$(nproc --all)
 ```
 
-Output: `NervAOSP-Eva-01-<date>-<variant>-<device>.zip`
+Output: `NervAOSP-Shito-01-<date>-<variant>-<device>.zip`
 
 ## GMS
 
