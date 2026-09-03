@@ -1,38 +1,105 @@
-NervAOSP
-========
+# NervAOSP
 
-Getting started
----------------
+## Getting Started
 
-Initialize and sync the source:
+NervAOSP is based on LineageOS (Android 16), so you should start from a
+LineageOS-compatible device tree.
 
-```
+### Download the Source
+
+Initialize the repo:
+
+```bash
 repo init -u https://github.com/NervAOSP/Manifest.git -b 16.2 --git-lfs --depth 1
 ```
+
 Then sync:
-```
+
+```bash
 repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc)
 ```
 
-Initialize the build environment, then select a supported device target:
+### Set up Build Environment
 
-# Build
-
-- Set up the build environment
 ```bash
 . b*/env*
 ```
 
-- Select a target
+---
+
+## Building NervAOSP
+
+### Choose Device
+
+Select your device target:
+
 ```bash
-unit lineage_codename-bp4a-user
+unit lineage_<codename>-bp4a-user
 ```
+
+Build type defaults to `userdebug` if omitted, for example:
+
 ```bash
-example
 unit lineage_courbet-bp4a-userdebug
 ```
 
-- To start compiling
+### Build the ROM
+
+Compile (this also packages the flashable zip):
+
 ```bash
 fly -j$(nproc --all)
 ```
+
+The output zip is named `NervAOSP-Eva-01-<date>-<device>.zip`.
+
+---
+
+## Google Mobile Services (GMS)
+
+NervAOSP supports build-time integrated GMS (the same prebuilt GApps used by
+AxionOS, pulled from `vendor/gms`). The flavor is selected per-device by
+setting `NERV_VAR` in the device makefile (`lineage_<codename>.mk`) **before**
+inheriting the common product config:
+
+```make
+# In lineage_<codename>.mk
+NERV_VAR := full      # Full Google Mobile Services
+# NERV_VAR := pico    # Minimal Google Mobile Services
+# NERV_VAR := core    # Core Google Mobile Services
+# NERV_VAR := vanilla # Non-GMS build (default)
+```
+
+Available `NERV_VAR` values:
+
+| `NERV_VAR` | Result |
+| --- | --- |
+| `full` | Full Google Mobile Services (GMS) |
+| `pico` | Minimal Google Mobile Services |
+| `core` | Core Google Mobile Services |
+| `vanilla` | Non-GMS build (default when unset) |
+
+Optional GMS package flags (overridable from your device/product makefile):
+
+```make
+# Telecom-related Google apps/services bundle.
+# Defaults: false for pico, true for core/full.
+TARGET_INCLUDE_GOOGLE_TELECOMM := true/false
+
+# Google setup/partner setup bundle.
+# Defaults: false for pico/core, true for full.
+TARGET_INCLUDE_PARTNER_SETUP := true/false
+```
+
+The build flavor shown in the output zip/version is one of `GMS`, `PICO`,
+`CORE`, or `VANILLA`, for example:
+
+- `NervAOSP-Eva-01-20260903-GMS-codename.zip` for `full`
+- `NervAOSP-Eva-01-20260903-codename.zip` for `vanilla`
+
+---
+
+## Credits
+
+NervAOSP is based on the work of the Android Open Source Project (AOSP),
+LineageOS, and AxionOS. Thanks to all contributors for their hard work.

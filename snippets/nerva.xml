@@ -60,8 +60,8 @@
   <project path="tools/extract-utils" name="LineageOS/android_tools_extract-utils" />
   <project path="vendor/apn" name="LineageOS/android_vendor_apn" revision="main" />
   <project path="vendor/crowdin" name="LineageOS/android_vendor_crowdin" />
+  <project path="vendor/gms" name="NervAOSP/android_vendor_gms" revision="refs/heads/lineage-23.2" />
   <project path="vendor/lineage" name="NervAOSP/android_vendor_nerv" revision="refs/heads/16.2" />
-
   <!-- Legacy AOSP additions -->
   <project path="external/tinyxml" name="platform/external/tinyxml" groups="pdk" remote="aosp" revision="refs/tags/android-11.0.0_r46" />
   <project path="hardware/knowles/athletico/sound_trigger_hal" name="LineageOS/android_hardware_knowles_athletico_sound_trigger_hal" groups="coral" />
