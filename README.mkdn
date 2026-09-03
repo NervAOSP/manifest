@@ -96,10 +96,3 @@ The build flavor shown in the output zip/version is one of `GMS`, `PICO`,
 
 - `NervAOSP-Eva-01-20260903-GMS-codename.zip` for `full`
 - `NervAOSP-Eva-01-20260903-codename.zip` for `vanilla`
-
----
-
-## Credits
-
-NervAOSP is based on the work of the Android Open Source Project (AOSP),
-LineageOS, and AxionOS. Thanks to all contributors for their hard work.
