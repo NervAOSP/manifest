@@ -1,97 +1,34 @@
 # NervAOSP
 
-## Getting Started
-
-NervAOSP is based on LineageOS (Android 16), so you should start from a
+NervAOSP is a custom Android 16 ROM based on LineageOS. Use a
 LineageOS-compatible device tree.
 
-### Download the Source
-
-Initialize the repo:
+## Build
 
 ```bash
 repo init -u https://github.com/NervAOSP/Manifest.git -b 16.2 --git-lfs --depth 1
-```
-
-Then sync:
-
-```bash
 repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc)
-```
-
-### Set up Build Environment
-
-```bash
 . b*/env*
 ```
 
----
-
-## Building NervAOSP
-
-### Choose Device
-
-Select your device target:
+Select a device, then build (this also packages the flashable zip):
 
 ```bash
-unit lineage_<codename>-bp4a-user
-```
-
-Build type defaults to `userdebug` if omitted, for example:
-
-```bash
-unit lineage_courbet-bp4a-userdebug
-```
-
-### Build the ROM
-
-Compile (this also packages the flashable zip):
-
-```bash
+unit <codename>-userdebug     # e.g. unit courbet-userdebug
 fly -j$(nproc --all)
 ```
 
-The output zip is named `NervAOSP-Eva-01-<date>-<device>.zip`.
+Output: `NervAOSP-Eva-01-<date>-<variant>-<device>.zip`
 
----
+## GMS
 
-## Google Mobile Services (GMS)
-
-NervAOSP supports build-time integrated GMS. The flavor is selected per-device
-by setting `NERV_VAR` in the device makefile (`lineage_<codename>.mk`)
-**before** inheriting the common product config:
+Set `NERV_VAR` in `lineage_<codename>.mk` to select build-time integrated GMS:
 
 ```make
-# In lineage_<codename>.mk
-NERV_VAR := full      # Full Google Mobile Services
-# NERV_VAR := pico    # Minimal Google Mobile Services
-# NERV_VAR := core    # Core Google Mobile Services
-# NERV_VAR := vanilla # Non-GMS build (default)
+NERV_VAR := full      # GMS
+# NERV_VAR := pico    # minimal
+# NERV_VAR := core    # core
+# NERV_VAR := vanilla # non-GMS (default)
 ```
 
-Available `NERV_VAR` values:
-
-| `NERV_VAR` | Result |
-| --- | --- |
-| `full` | Full Google Mobile Services (GMS) |
-| `pico` | Minimal Google Mobile Services |
-| `core` | Core Google Mobile Services |
-| `vanilla` | Non-GMS build (default when unset) |
-
-Optional GMS package flags (overridable from your device/product makefile):
-
-```make
-# Telecom-related Google apps/services bundle.
-# Defaults: false for pico, true for core/full.
-TARGET_INCLUDE_GOOGLE_TELECOMM := true/false
-
-# Google setup/partner setup bundle.
-# Defaults: false for pico/core, true for full.
-TARGET_INCLUDE_PARTNER_SETUP := true/false
-```
-
-The build flavor shown in the output zip/version is one of `GMS`, `PICO`,
-`CORE`, or `VANILLA`, for example:
-
-- `NervAOSP-Eva-01-20260903-GMS-codename.zip` for `full`
-- `NervAOSP-Eva-01-20260903-codename.zip` for `vanilla`
+Variants map to the `GMS`/`PICO`/`CORE` suffix of the zip name.
